@@ -5,11 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Program",
-            "type": "node",
+            "name": "Launch in Chrome",
+            "type": "chrome",
             "request": "launch",
-            "program": "${workspaceFolder}/node_modules/.bin/next",
-            "args": ["dev"]
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/src",
+            "preLaunchTask": "Start dev",
+            "postDebugTask": "Terminate dev"
         }
     ]
 }

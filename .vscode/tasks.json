@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start dev",
+            "type": "shell",
+            "command": "npm run dev",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "focus": false
+            }
+        },
+        {
+            "label": "Terminate dev",
+            "type": "shell",
+            "command": "pkill -f 'npm run dev' || true",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "silent"
+            }
+        }
+    ]
+}
