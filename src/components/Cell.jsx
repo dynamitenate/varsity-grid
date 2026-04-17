@@ -8,7 +8,9 @@ export default function Cell() {
             style={{
                 width: "100px",
                 height: "100px",
-                backgroundColor: "red"
+                backgroundColor: "#5E6875",
+                borderColor: "#B4BFCF",
+                color: "#B4BFCF"
             }}
             onClick={() => {
                 setAnswer("clicked");
