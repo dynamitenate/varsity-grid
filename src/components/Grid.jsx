@@ -1,29 +1,35 @@
-import Cell from "./Cell";
+import Cell, { HeaderCell, GhostCell } from "./Cell";
 import "./Grid.css";
 
 export default function Grid() {
     return (
-        <>
-            <h1>{"Varsity Grid"}</h1>
-            <table className="grid-table">
-                <tbody>
-                    <tr>
-                        <td><Cell /></td>
-                        <td><Cell /></td>
-                        <td><Cell /></td>
-                    </tr>
-                    <tr>
-                        <td><Cell /></td>
-                        <td><Cell /></td>
-                        <td><Cell /></td>
-                    </tr>
-                    <tr>
-                        <td><Cell /></td>
-                        <td><Cell /></td>
-                        <td><Cell /></td>
-                    </tr>
-                </tbody>
-            </table>
-        </>
+        <div className="grid-body">
+            <div className="grid-table">
+                <div className="grid-row">
+                    <div className="grid-table-cell"><GhostCell /></div>
+                    <div className="grid-table-cell"><HeaderCell /></div>
+                    <div className="grid-table-cell"><HeaderCell /></div>
+                    <div className="grid-table-cell"><HeaderCell /></div>
+                </div>
+                <div className="grid-row">
+                    <div className="grid-table-cell"><HeaderCell /></div>
+                    <div className="grid-table-cell"><Cell /></div>
+                    <div className="grid-table-cell"><Cell /></div>
+                    <div className="grid-table-cell"><Cell /></div>
+                </div>
+                <div className="grid-row">
+                    <div className="grid-table-cell"><HeaderCell /></div>
+                    <div className="grid-table-cell"><Cell /></div>
+                    <div className="grid-table-cell"><Cell /></div>
+                    <div className="grid-table-cell"><Cell /></div>
+                </div>
+                <div className="grid-row">
+                    <div className="grid-table-cell"><HeaderCell /></div>
+                    <div className="grid-table-cell"><Cell /></div>
+                    <div className="grid-table-cell"><Cell /></div>
+                    <div className="grid-table-cell"><Cell /></div>
+                </div>
+            </div>
+        </div>
     );
 }

@@ -1,0 +1,17 @@
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #5E6875;
+    border-color: #B4BFCF;
+    border-radius: 10%;
+    color: #B4BFCF;
+    cursor: pointer;
+}
+
+.cell.header {
+    background-color: #2a2e34;
+}
+
+.cell.ghost {
+    background-color: transparent;
+}
