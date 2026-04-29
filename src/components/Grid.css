@@ -12,12 +12,6 @@
     gap: 0;
 }
 
-.grid-table-cell {
-    flex: 1;
-    padding: 5px;
-    box-sizing: border-box;
-}
-
 .grid-body {
     background-color: #B4BFCF;
     width: fit-content;
