@@ -6,6 +6,8 @@
     border-radius: 10%;
     color: #B4BFCF;
     cursor: pointer;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .cell.header {
@@ -14,4 +16,5 @@
 
 .cell.ghost {
     background-color: transparent;
+    cursor: auto;
 }

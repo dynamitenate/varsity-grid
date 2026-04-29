@@ -16,11 +16,13 @@ export default function Cell() {
     );
 }
 
-export function HeaderCell() {
+export function HeaderCell({ text }) {
     return (
         <div
             className="cell header"
-        />
+        >
+            {text}
+        </div>
     );
 }
 
