@@ -1,4 +1,6 @@
 import Cell, { HeaderCell, GhostCell } from "./Cell";
+import Modal from "./Modal";
+import { useState } from "react";
 import "./Grid.css";
 
 let categories = {
@@ -15,34 +17,38 @@ let categories = {
 }
 
 export default function Grid() {
+    let [modalOpen, setModalOpen] = useState(false);
     return (
-        <div className="grid-body">
-            <div className="grid-table">
-                <div className="grid-row">
-                    <GhostCell />
-                    <HeaderCell text={categories.columns.c1} />
-                    <HeaderCell text={categories.columns.c2} />
-                    <HeaderCell text={categories.columns.c3} />
-                </div>
-                <div className="grid-row">
-                    <HeaderCell text={categories.rows.r1} />
-                    <Cell />
-                    <Cell />
-                    <Cell />
-                </div>
-                <div className="grid-row">
-                    <HeaderCell text={categories.rows.r2} />
-                    <Cell />
-                    <Cell />
-                    <Cell />
-                </div>
-                <div className="grid-row">
-                    <HeaderCell text={categories.rows.r3} />
-                    <Cell />
-                    <Cell />
-                    <Cell />
+        <>
+            <div className="grid-body">
+                <div className="grid-table">
+                    <div className="grid-row">
+                        <GhostCell />
+                        <HeaderCell text={categories.columns.c1} />
+                        <HeaderCell text={categories.columns.c2} />
+                        <HeaderCell text={categories.columns.c3} />
+                    </div>
+                    <div className="grid-row">
+                        <HeaderCell text={categories.rows.r1} />
+                        <Cell onClick={() => setModalOpen(true)} />
+                        <Cell onClick={() => setModalOpen(true)} />
+                        <Cell onClick={() => setModalOpen(true)} />
+                    </div>
+                    <div className="grid-row">
+                        <HeaderCell text={categories.rows.r2} />
+                        <Cell onClick={() => setModalOpen(true)} />
+                        <Cell onClick={() => setModalOpen(true)} />
+                        <Cell onClick={() => setModalOpen(true)} />
+                    </div>
+                    <div className="grid-row">
+                        <HeaderCell text={categories.rows.r3} />
+                        <Cell onClick={() => setModalOpen(true)} />
+                        <Cell onClick={() => setModalOpen(true)} />
+                        <Cell onClick={() => setModalOpen(true)} />
+                    </div>
                 </div>
             </div>
-        </div>
+            {modalOpen && <Modal onClose={() => setModalOpen(false)}/>}
+        </>
     );
 }

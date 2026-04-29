@@ -1,15 +1,13 @@
 import { useState } from "react";
 import "./Cell.css";
 
-export default function Cell() {
+export default function Cell({ onClick }) {
     const [answer, setAnswer] = useState(null);
 
     return (
         <div
             className="cell"
-            onClick={() => {
-                setAnswer("clicked");
-            }}
+            onClick={onClick}
         >
             {answer}
         </div>
