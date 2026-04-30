@@ -1,6 +1,6 @@
 import Cell, { HeaderCell, GhostCell } from "./Cell";
 import Modal from "./Modal";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import "./Grid.css";
 
 let categories = {
@@ -18,6 +18,11 @@ let categories = {
 
 export default function Grid() {
     let [modalOpen, setModalOpen] = useState(false);
+
+    const handleCloseModal = useCallback(() => {
+        setModalOpen(false);
+    }, []);
+
     return (
         <>
             <div className="grid-body">
@@ -48,7 +53,7 @@ export default function Grid() {
                     </div>
                 </div>
             </div>
-            {modalOpen && <Modal onClose={() => setModalOpen(false)}/>}
+            {modalOpen && <Modal onClose={handleCloseModal}/>}
         </>
     );
 }

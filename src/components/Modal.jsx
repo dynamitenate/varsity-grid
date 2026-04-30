@@ -1,18 +1,44 @@
 import "./Modal.css";
+import { memo, useState, useRef, useEffect } from "react";
 
-export default function Modal({ onClose }) {
+export default memo(function Modal({ onClose }) {
+    let [value, setValue] = useState("");
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
+
     const handleBackdropClick = (e) => {
         if (e.target === e.currentTarget) {
             onClose();
         }
     };
 
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter" && value.length > 0) {
+            console.log("❗️");
+            onClose();
+        }
+    }
+
     return (
-        <div className="modal-backdrop" onClick={handleBackdropClick}>
-            <div className="modal-content">
-                <h2>Modal Title</h2>
-                <p>Modal content goes here</p>
-            </div>
+        <div
+            className="modal-backdrop"
+            onClick={handleBackdropClick}>
+            <input
+                ref={inputRef}
+                id={"input0"}
+                className="modal-content"
+                value={value}
+                placeholder={"Type a school name..."}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+            />
         </div>
     );
-}
+});
