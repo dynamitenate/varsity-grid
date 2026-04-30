@@ -1,9 +1,7 @@
 import { useState } from "react";
 import "./Cell.css";
 
-export default function Cell({ onClick }) {
-    const [answer, setAnswer] = useState(null);
-
+export default function Cell({ answer, onClick }) {
     return (
         <div
             className="cell"

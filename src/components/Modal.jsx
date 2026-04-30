@@ -1,7 +1,7 @@
 import "./Modal.css";
 import { memo, useState, useRef, useEffect } from "react";
 
-export default memo(function Modal({ onClose }) {
+export default memo(function Modal({ onClose, onSubmit }) {
     let [value, setValue] = useState("");
     const inputRef = useRef(null);
 
@@ -21,7 +21,7 @@ export default memo(function Modal({ onClose }) {
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter" && value.length > 0) {
-            console.log("❗️");
+            onSubmit(value);
             onClose();
         }
     }
