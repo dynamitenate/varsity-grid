@@ -3,7 +3,7 @@ import Modal from "./Modal";
 import { useState, useCallback } from "react";
 import "./Grid.css";
 
-let categories = {
+const categories = {
     columns: {
         c1: "c1",
         c2: "c2",
@@ -17,23 +17,23 @@ let categories = {
 }
 
 export default function Grid() {
-    let [modalOpen, setModalOpen] = useState(false);
-    let [selectedCell, setSelectedCell] = useState();
-    let [answers, setAnswers] = useState(["", "", "", "", "", "", "", "", ""]);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedCell, setSelectedCell] = useState<string | undefined>(undefined);
+    const [answers, setAnswers] = useState(["", "", "", "", "", "", "", "", ""]);
 
     const handleCloseModal = useCallback(() => {
         setSelectedCell(undefined);
         setModalOpen(false);
     }, []);
 
-    const handleSubmitModal = (value) => {
-        let newAnswers = [...answers];
-        let cellInt = parseInt(selectedCell);
+    const handleSubmitModal = (value: string) => {
+        const newAnswers = [...answers];
+        const cellInt = parseInt(selectedCell as string);
         newAnswers[cellInt] = value;
         setAnswers(newAnswers);
     }
 
-    const handleCellClick = (e, cellId) => {
+    const handleCellClick = (_e: React.MouseEvent<HTMLDivElement>, cellId: string) => {
         // TODO: this seems to cause a double-render
         setSelectedCell(cellId);
         setModalOpen(true);
@@ -52,21 +52,21 @@ export default function Grid() {
                     </div>
                     <div className="grid-row">
                         <HeaderCell text={categories.rows.r1} />
-                        <Cell answer={answers[0]} onClick={(e) => handleCellClick(e, "0")} />
-                        <Cell answer={answers[1]} onClick={(e) => handleCellClick(e, "1")} />
-                        <Cell answer={answers[2]} onClick={(e) => handleCellClick(e, "2")} />
+                        <Cell answer={answers[0]} onClick={(e: React.MouseEvent<HTMLDivElement>) => handleCellClick(e, "0")} />
+                        <Cell answer={answers[1]} onClick={(e: React.MouseEvent<HTMLDivElement>) => handleCellClick(e, "1")} />
+                        <Cell answer={answers[2]} onClick={(e: React.MouseEvent<HTMLDivElement>) => handleCellClick(e, "2")} />
                     </div>
                     <div className="grid-row">
                         <HeaderCell text={categories.rows.r2} />
-                        <Cell answer={answers[3]} onClick={(e) => handleCellClick(e, "3")} />
-                        <Cell answer={answers[4]} onClick={(e) => handleCellClick(e, "4")} />
-                        <Cell answer={answers[5]} onClick={(e) => handleCellClick(e, "5")} />
+                        <Cell answer={answers[3]} onClick={(e: React.MouseEvent<HTMLDivElement>) => handleCellClick(e, "3")} />
+                        <Cell answer={answers[4]} onClick={(e: React.MouseEvent<HTMLDivElement>) => handleCellClick(e, "4")} />
+                        <Cell answer={answers[5]} onClick={(e: React.MouseEvent<HTMLDivElement>) => handleCellClick(e, "5")} />
                     </div>
                     <div className="grid-row">
                         <HeaderCell text={categories.rows.r3} />
-                        <Cell answer={answers[6]} onClick={(e) => handleCellClick(e, "6")} />
-                        <Cell answer={answers[7]} onClick={(e) => handleCellClick(e, "7")} />
-                        <Cell answer={answers[8]} onClick={(e) => handleCellClick(e, "8")} />
+                        <Cell answer={answers[6]} onClick={(e: React.MouseEvent<HTMLDivElement>) => handleCellClick(e, "6")} />
+                        <Cell answer={answers[7]} onClick={(e: React.MouseEvent<HTMLDivElement>) => handleCellClick(e, "7")} />
+                        <Cell answer={answers[8]} onClick={(e: React.MouseEvent<HTMLDivElement>) => handleCellClick(e, "8")} />
                     </div>
                 </div>
             </div>

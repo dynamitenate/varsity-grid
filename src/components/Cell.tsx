@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { ReactNode } from "react";
 import "./Cell.css";
 
-export default function Cell({ answer, onClick }) {
+interface CellProps {
+  answer: ReactNode;
+  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+}
+
+export default function Cell({ answer, onClick }: CellProps) {
     return (
         <div
             className="cell"
@@ -12,7 +17,11 @@ export default function Cell({ answer, onClick }) {
     );
 }
 
-export function HeaderCell({ text }) {
+interface HeaderCellProps {
+  text: string;
+}
+
+export function HeaderCell({ text }: HeaderCellProps) {
     return (
         <div
             className="cell header"

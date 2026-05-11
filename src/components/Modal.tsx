@@ -1,25 +1,30 @@
 import "./Modal.css";
-import { memo, useState, useRef, useEffect } from "react";
+import { memo, useState, useRef, useEffect, ChangeEvent, KeyboardEvent, MouseEvent } from "react";
 
-export default memo(function Modal({ onClose, onSubmit }) {
-    let [value, setValue] = useState("");
-    const inputRef = useRef(null);
+interface ModalProps {
+  onClose: () => void;
+  onSubmit: (value: string) => void;
+}
+
+export default memo(function Modal({ onClose, onSubmit }: ModalProps) {
+    const [value, setValue] = useState("");
+    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         inputRef.current?.focus();
     }, []);
 
-    const handleBackdropClick = (e) => {
+    const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) {
             onClose();
         }
     };
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
     }
 
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && value.length > 0) {
             onSubmit(value);
             onClose();
