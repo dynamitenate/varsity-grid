@@ -20,7 +20,7 @@ const categories = {
 export default function Grid() {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedCell, setSelectedCell] = useState<string | undefined>(undefined);
-    const [gameState, setGameState] = useState<GameState>({ answers: ["", "", "", "", "", "", "", "", ""] });
+    const [gameState, setGameState] = useState<GameState>({ answers: ["", "", "", "", "", "", "", "", ""], tries: 10, score: 900 });
 
     const handleCloseModal = useCallback(() => {
         setSelectedCell(undefined);
@@ -31,6 +31,8 @@ export default function Grid() {
         const newGameState: GameState = {...gameState};
         const cellInt = parseInt(selectedCell as string);
         newGameState.answers[cellInt] = value;
+        newGameState.tries--;
+        newGameState.score -= 100; // TODO: We'll eventually want this to be dynamic...
         setGameState(newGameState);
     }
 
@@ -41,6 +43,7 @@ export default function Grid() {
 
     return (
         <>
+            {/* TODO: Make a separate header component */}
             <h1
                 style={{
                     "color": "#dedede",
@@ -79,6 +82,12 @@ export default function Grid() {
                             <Cell answer={gameState.answers[7]} onClick={() => handleCellClick("7")} />
                             <Cell answer={gameState.answers[8]} onClick={() => handleCellClick("8")} />
                         </div>
+                    </div>
+                    {/* TODO: Make this separate component(s) */}
+                    <div style={{color: "black"}}>
+                        {"Tries: " + gameState.tries}
+                        <br />
+                        {"Score: " + gameState.score}
                     </div>
                 </div>
                 {modalOpen && <Modal
