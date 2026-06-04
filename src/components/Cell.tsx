@@ -1,18 +1,21 @@
 import { ReactNode } from "react";
 import "./Cell.css";
+import { useGame } from "../context/GameContext";
 
 interface CellProps {
-  answer: ReactNode;
-  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+    cellId: number;
+    onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export default function Cell({ answer, onClick }: CellProps) {
+export default function Cell({ cellId, onClick }: CellProps) {
+    const { game } = useGame();
+    const value = game.answers[cellId];
     return (
         <div
             className="cell"
             onClick={onClick}
         >
-            {answer}
+            {value}
         </div>
     );
 }

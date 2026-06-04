@@ -1,9 +1,12 @@
 import Grid from './components/Grid'
+import { GameProvider } from './context/GameContext'
 
 function App() {
   return (
     <>
-      <Grid />
+      <GameProvider>
+        <Grid />
+      </GameProvider>
     </>
   )
 }

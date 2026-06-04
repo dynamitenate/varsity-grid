@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import { useState, useCallback } from "react";
 import "./Grid.css";
 import GameState from "../types/Game";
+import { GameProvider, useGame } from "../context/GameContext";
 
 const categories = {
     columns: {
@@ -20,7 +21,7 @@ const categories = {
 export default function Grid() {
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedCell, setSelectedCell] = useState<string | undefined>(undefined);
-    const [gameState, setGameState] = useState<GameState>({ answers: ["", "", "", "", "", "", "", "", ""], tries: 10, score: 900 });
+    const { game, updateGame } = useGame();
 
     const handleCloseModal = useCallback(() => {
         setSelectedCell(undefined);
@@ -28,12 +29,12 @@ export default function Grid() {
     }, []);
 
     const handleSubmitModal = (value: string) => {
-        const newGameState: GameState = {...gameState};
+        const newGameState: GameState = {...game};
         const cellInt = parseInt(selectedCell as string);
         newGameState.answers[cellInt] = value;
         newGameState.tries--;
         newGameState.score -= 100; // TODO: We'll eventually want this to be dynamic...
-        setGameState(newGameState);
+        updateGame(newGameState);
     }
 
     const handleCellClick = (cellId: string) => {
@@ -66,30 +67,31 @@ export default function Grid() {
                         </div>
                         <div className="grid-row">
                             <HeaderCell text={categories.rows.r1} />
-                            <Cell answer={gameState.answers[0]} onClick={() => handleCellClick("0")} />
-                            <Cell answer={gameState.answers[1]} onClick={() => handleCellClick("1")} />
-                            <Cell answer={gameState.answers[2]} onClick={() => handleCellClick("2")} />
+                            <Cell cellId={0} onClick={() => handleCellClick("0")} />
+                            <Cell cellId={1} onClick={() => handleCellClick("1")} />
+                            <Cell cellId={2} onClick={() => handleCellClick("2")} />
                         </div>
                         <div className="grid-row">
                             <HeaderCell text={categories.rows.r2} />
-                            <Cell answer={gameState.answers[3]} onClick={() => handleCellClick("3")} />
-                            <Cell answer={gameState.answers[4]} onClick={() => handleCellClick("4")} />
-                            <Cell answer={gameState.answers[5]} onClick={() => handleCellClick("5")} />
+                            <Cell cellId={3} onClick={() => handleCellClick("3")} />
+                            <Cell cellId={4} onClick={() => handleCellClick("4")} />
+                            <Cell cellId={5} onClick={() => handleCellClick("5")} />
                         </div>
                         <div className="grid-row">
                             <HeaderCell text={categories.rows.r3} />
-                            <Cell answer={gameState.answers[6]} onClick={() => handleCellClick("6")} />
-                            <Cell answer={gameState.answers[7]} onClick={() => handleCellClick("7")} />
-                            <Cell answer={gameState.answers[8]} onClick={() => handleCellClick("8")} />
+                            <Cell cellId={6} onClick={() => handleCellClick("6")} />
+                            <Cell cellId={7} onClick={() => handleCellClick("7")} />
+                            <Cell cellId={8} onClick={() => handleCellClick("8")} />
                         </div>
                     </div>
                     {/* TODO: Make this separate component(s) */}
                     <div style={{color: "black"}}>
-                        {"Tries: " + gameState.tries}
+                        {"Tries: " + game.tries}
                         <br />
-                        {"Score: " + gameState.score}
+                        {"Score: " + game.score}
                     </div>
                 </div>
+                {/* TODO: Make this part of the top-level component */}
                 {modalOpen && <Modal
                     onClose={handleCloseModal}
                     onSubmit={handleSubmitModal}
