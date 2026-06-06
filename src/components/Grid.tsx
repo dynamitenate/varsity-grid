@@ -20,26 +20,27 @@ const categories = {
 }
 
 export default function Grid() {
-    const [selectedCell, setSelectedCell] = useState<string | undefined>(undefined);
+    const [selectedCellId, setSelectedCellId] = useState<number | undefined>(undefined);
     const { modalState, updateModalState } = useModal();
     const { game, updateGame } = useGame();
 
     const handleCloseModal = useCallback(() => {
-        setSelectedCell(undefined);
+        setSelectedCellId(undefined);
         updateModalState("close");
     }, []);
 
     const handleSubmitModal = (value: string) => {
-        const newGameState: GameState = {...game};
-        const cellInt = parseInt(selectedCell as string);
-        newGameState.answers[cellInt] = value;
-        newGameState.tries--;
-        newGameState.score -= 100; // TODO: We'll eventually want this to be dynamic...
-        updateGame(newGameState);
+        if (selectedCellId !== undefined) {
+            const newGameState: GameState = {...game};
+            newGameState.answers[selectedCellId] = value;
+            newGameState.tries--;
+            newGameState.score -= 100; // TODO: We'll eventually want this to be dynamic...
+            updateGame(newGameState);
+        }
     }
 
-    const handleCellClick = (cellId: string) => {
-        setSelectedCell(cellId);
+    const handleCellClick = (cellId: number) => {
+        setSelectedCellId(cellId);
         updateModalState("open");
     }
 
@@ -68,21 +69,21 @@ export default function Grid() {
                         </div>
                         <div className="grid-row">
                             <HeaderCell text={categories.rows.r1} />
-                            <Cell cellId={0} onClick={() => handleCellClick("0")} />
-                            <Cell cellId={1} onClick={() => handleCellClick("1")} />
-                            <Cell cellId={2} onClick={() => handleCellClick("2")} />
+                            <Cell cellId={0} onClick={handleCellClick} />
+                            <Cell cellId={1} onClick={handleCellClick} />
+                            <Cell cellId={2} onClick={handleCellClick} />
                         </div>
                         <div className="grid-row">
                             <HeaderCell text={categories.rows.r2} />
-                            <Cell cellId={3} onClick={() => handleCellClick("3")} />
-                            <Cell cellId={4} onClick={() => handleCellClick("4")} />
-                            <Cell cellId={5} onClick={() => handleCellClick("5")} />
+                            <Cell cellId={3} onClick={handleCellClick} />
+                            <Cell cellId={4} onClick={handleCellClick} />
+                            <Cell cellId={5} onClick={handleCellClick} />
                         </div>
                         <div className="grid-row">
                             <HeaderCell text={categories.rows.r3} />
-                            <Cell cellId={6} onClick={() => handleCellClick("6")} />
-                            <Cell cellId={7} onClick={() => handleCellClick("7")} />
-                            <Cell cellId={8} onClick={() => handleCellClick("8")} />
+                            <Cell cellId={6} onClick={handleCellClick} />
+                            <Cell cellId={7} onClick={handleCellClick} />
+                            <Cell cellId={8} onClick={handleCellClick} />
                         </div>
                     </div>
                     {/* TODO: Make this separate component(s) */}

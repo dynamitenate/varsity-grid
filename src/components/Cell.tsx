@@ -4,18 +4,17 @@ import { useGame } from "../context/GameContext";
 
 interface CellProps {
     cellId: number;
-    onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+    onClick: (cellId: number) => void;
 }
 
 export default function Cell({ cellId, onClick }: CellProps) {
     const { game } = useGame();
-    const value = game.answers[cellId];
     return (
         <div
             className="cell"
-            onClick={onClick}
+            onClick={() => onClick(cellId)}
         >
-            {value}
+            {game.answers[cellId]}
         </div>
     );
 }
