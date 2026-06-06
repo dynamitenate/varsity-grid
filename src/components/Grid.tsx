@@ -3,7 +3,8 @@ import Modal from "./Modal";
 import { useState, useCallback } from "react";
 import "./Grid.css";
 import GameState from "../types/Game";
-import { GameProvider, useGame } from "../context/GameContext";
+import { useGame } from "../context/GameContext";
+import { useModal } from "../context/ModalContext";
 
 const categories = {
     columns: {
@@ -19,13 +20,13 @@ const categories = {
 }
 
 export default function Grid() {
-    const [modalOpen, setModalOpen] = useState(false);
     const [selectedCell, setSelectedCell] = useState<string | undefined>(undefined);
+    const { modalState, updateModalState } = useModal();
     const { game, updateGame } = useGame();
 
     const handleCloseModal = useCallback(() => {
         setSelectedCell(undefined);
-        setModalOpen(false);
+        updateModalState("close");
     }, []);
 
     const handleSubmitModal = (value: string) => {
@@ -39,7 +40,7 @@ export default function Grid() {
 
     const handleCellClick = (cellId: string) => {
         setSelectedCell(cellId);
-        setModalOpen(true);
+        updateModalState("open");
     }
 
     return (
@@ -92,7 +93,7 @@ export default function Grid() {
                     </div>
                 </div>
                 {/* TODO: Make this part of the top-level component */}
-                {modalOpen && <Modal
+                {modalState === "open" && <Modal
                     onClose={handleCloseModal}
                     onSubmit={handleSubmitModal}
                 />}
