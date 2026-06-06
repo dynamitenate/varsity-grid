@@ -46,59 +46,46 @@ export default function Grid() {
 
     return (
         <>
-            {/* TODO: Make a separate header component */}
-            <h1
-                style={{
-                    "color": "#dedede",
-                    "fontFamily": "'Chakra Petch', sans-serif",
-                    "fontSize": "50px",
-                    "fontWeight": "700"
-                }}
-            >
-                {"Varsity Grid"}
-            </h1>
-            <div>
-                {/* TODO: Could maybe abstract this Grid component down a layer... */}
-                <div className="grid-body">
-                    <div className="grid-table">
-                        <div className="grid-row">
-                            <GhostCell />
-                            <HeaderCell text={categories.columns.c1} />
-                            <HeaderCell text={categories.columns.c2} />
-                            <HeaderCell text={categories.columns.c3} />
-                        </div>
-                        <div className="grid-row">
-                            <HeaderCell text={categories.rows.r1} />
-                            <Cell cellId={0} onClick={handleCellClick} />
-                            <Cell cellId={1} onClick={handleCellClick} />
-                            <Cell cellId={2} onClick={handleCellClick} />
-                        </div>
-                        <div className="grid-row">
-                            <HeaderCell text={categories.rows.r2} />
-                            <Cell cellId={3} onClick={handleCellClick} />
-                            <Cell cellId={4} onClick={handleCellClick} />
-                            <Cell cellId={5} onClick={handleCellClick} />
-                        </div>
-                        <div className="grid-row">
-                            <HeaderCell text={categories.rows.r3} />
-                            <Cell cellId={6} onClick={handleCellClick} />
-                            <Cell cellId={7} onClick={handleCellClick} />
-                            <Cell cellId={8} onClick={handleCellClick} />
-                        </div>
+            {/* TODO: Could maybe abstract this Grid component down a layer... */}
+            <div className="grid-body">
+                <div className="grid-table">
+                    <div className="grid-row">
+                        <GhostCell />
+                        <HeaderCell text={categories.columns.c1} />
+                        <HeaderCell text={categories.columns.c2} />
+                        <HeaderCell text={categories.columns.c3} />
                     </div>
-                    {/* TODO: Make this separate component(s) */}
-                    <div style={{color: "black"}}>
-                        {"Tries: " + game.tries}
-                        <br />
-                        {"Score: " + game.score}
+                    <div className="grid-row">
+                        <HeaderCell text={categories.rows.r1} />
+                        <Cell cellId={0} onClick={handleCellClick} />
+                        <Cell cellId={1} onClick={handleCellClick} />
+                        <Cell cellId={2} onClick={handleCellClick} />
+                    </div>
+                    <div className="grid-row">
+                        <HeaderCell text={categories.rows.r2} />
+                        <Cell cellId={3} onClick={handleCellClick} />
+                        <Cell cellId={4} onClick={handleCellClick} />
+                        <Cell cellId={5} onClick={handleCellClick} />
+                    </div>
+                    <div className="grid-row">
+                        <HeaderCell text={categories.rows.r3} />
+                        <Cell cellId={6} onClick={handleCellClick} />
+                        <Cell cellId={7} onClick={handleCellClick} />
+                        <Cell cellId={8} onClick={handleCellClick} />
                     </div>
                 </div>
-                {/* TODO: Make this part of the top-level component */}
-                {modalState === "open" && <Modal
-                    onClose={handleCloseModal}
-                    onSubmit={handleSubmitModal}
-                />}
+                {/* TODO: Make this separate component(s) */}
+                <div style={{color: "black"}}>
+                    {"Tries: " + game.tries}
+                    <br />
+                    {"Score: " + game.score}
+                </div>
             </div>
+            {/* TODO: Make this part of the top-level component */}
+            {modalState === "open" && <Modal
+                onClose={handleCloseModal}
+                onSubmit={handleSubmitModal}
+            />}
         </>
     );
 }
