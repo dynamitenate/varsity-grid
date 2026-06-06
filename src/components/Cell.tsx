@@ -26,7 +26,7 @@ interface HeaderCellProps {
 export function HeaderCell({ text }: HeaderCellProps) {
     return (
         <div
-            className="cell header"
+            className="cell header-cell"
         >
             {text}
         </div>
@@ -36,7 +36,7 @@ export function HeaderCell({ text }: HeaderCellProps) {
 export function GhostCell() {
     return (
         <div
-            className="cell ghost"
+            className="cell ghost-cell"
         />
     );
 }

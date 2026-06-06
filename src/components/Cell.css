@@ -12,11 +12,11 @@
     margin: 5px;
 }
 
-.cell.header {
+.cell.header-cell {
     background-color: #2a2e34;
 }
 
-.cell.ghost {
+.cell.ghost-cell {
     background-color: transparent;
     cursor: auto;
 }
